@@ -1,0 +1,18 @@
+import requests
+import re
+ 
+file = open("C:/Users/titi/Desktop/file/path.txt")  #打开存放链接的TXT文档
+while 1:
+    line = file.readline()  #逐行读链接
+    if not line:
+        break
+    image_url = line
+    r = requests.get(image_url)  #创建响应对象
+ 
+    path = re.sub("https://kar98.tech/download/","C:/Users/titi/Desktop/file/",line)
+    # 通过re模块的搜索和替换功能，生成下载文档的保存地址
+    path = re.sub('\n','',path)  #删除path末尾的换行符'\n'
+    with open(path,"wb") as f:  
+        f.write(r.content)  #将响应对象的内容写下来
+ 
+file.close()
